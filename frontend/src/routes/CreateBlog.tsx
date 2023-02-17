@@ -76,7 +76,7 @@ function CreateBlogs(props: { funcShow: any }) {
 
                     </div>
                     <div className='mb-4'>
-                        <label htmlFor="" className='block uppercase tracking-wide text-gray-700 text-2xl font-thin mb-2'>Blog Author:</label>
+                        <label htmlFor="" className='block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2'>Blog Author:</label>
                         <input
                             type="text"
                             className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'

@@ -17,3 +17,9 @@ body {
     overflow: auto;
 }
 
+.errorPage {
+    margin-top: 10rem;
+}
+.errorPage > * {
+    margin: .8rem auto;
+}
