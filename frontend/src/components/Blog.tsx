@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Blog({ title, author, image, onGo, id }: any) {
+function Blog({ title, author, image, onGo, id, date }: any) {
     const useStyle = {
         height: '4rem'
     }
@@ -19,7 +19,7 @@ function Blog({ title, author, image, onGo, id }: any) {
                     Written by {author}
                 </h2>
                 <p className='text-green-600  font-normal text-sm tracking-normal'>
-                    date
+                    {date}
                 </p>
             </div>
             <div className='bg-blue-700 p-1 rounded-md' style={useStyle}>

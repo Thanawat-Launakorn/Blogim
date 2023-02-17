@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    white-space: pre-line;
+    /* overflow: hidden; */
+    /* white-space: pre-wrap; */
+
+}
+
+.fill-window {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: auto;
+}
+

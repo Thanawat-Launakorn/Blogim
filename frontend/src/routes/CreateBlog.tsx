@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, Outlet } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { blogItem } from '../../../backend/models/blog'
 
 function CreateBlogs(props: { funcShow: any }) {
@@ -15,19 +15,23 @@ function CreateBlogs(props: { funcShow: any }) {
         })
     }
     async function addBlog() {
-        // await axios.post('http://localhost:3001/create', {
-        //     title: inputBlog.title, body: inputBlog.body, author: inputBlog.author, image: inputBlog.image
-        // })
-        // setChangeAddBlog('Adding Blog...')
-        // await wait(2000)
-        // navigate('/')
 
         try {
-            await axios.post('http://localhost:3000/api/blog/create', inputBlog)            
+            const wait = (ms: number) => new Promise(empty => setTimeout(empty, ms));
+            const date = new Date().getDate()
+            const month = new Date().getMonth() + 1
+            const year = new Date().getFullYear().toString().slice(2)
+            const hour = new Date().getHours()
+            const minute = new Date().getMinutes()
+            inputBlog.date = `${date}.${month}.${year}, ${hour}:${minute > 9 ? minute : '0' + minute.toString()}`
+            await axios.post('http://localhost:3000/api/blog/create', inputBlog)
+            setChangeAddBlog('Adding Blog...')
+            await wait(2000)
+            navigate('/')
         } catch (error) {
             alert(error)
         }
-        
+
     }
     useEffect(() => {
         props.funcShow(true)
@@ -65,6 +69,7 @@ function CreateBlogs(props: { funcShow: any }) {
                             value={inputBlog.body}
                             onChange={handleChange}
                             // autoComplete='off'
+                            rows={5}
                             required
 
                         />
@@ -94,7 +99,7 @@ function CreateBlogs(props: { funcShow: any }) {
                             name='image'
                             value={inputBlog.image}
                             onChange={handleChange}
-                            // autoComplete='off'
+                        // autoComplete='off'
 
                         />
 

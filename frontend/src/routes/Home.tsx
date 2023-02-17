@@ -13,7 +13,7 @@ function Home(props: { funcShow: any, onGo: any }) {
     const navigate = useNavigate()
 
     const useStyle = {
-        height: '30rem'
+        height: '28rem'
     }
 
     const getBlog = async () => {
@@ -33,31 +33,31 @@ function Home(props: { funcShow: any, onGo: any }) {
         props.onGo(id)
         navigate(`/blog/${id}`)
     }
-    
+
     return (
         <>
-            {loading ? <PropagateLoader color={'blue'} loading={loading} className='text-center h-20 mt-10' /> :
-                <div className='mx-auto w-full max-w-xl mt-10 flex flex-col justify-center'>
+            {loading ? <PropagateLoader color={'blue'} loading={loading} className='w-full text-center h-10 mt-10 mx-auto' /> :
+                <div className='mx-auto w-full max-w-2xl mt-10 flex flex-col justify-center'>
                     <input
                         placeholder='Search blogger...'
                         className='mx-auto max-w-md mb-2 p-2 bg-gray-200 shadow rounded focus:bg-white'
                         value={searchBlogger}
-                        onChange={(e) => setSearchBlogger(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBlogger(e.target.value)}
                     />
                     <div className='w-full flex justify-between mb-3 p-2'>
                         <h1 className='text-2xl font-bold'>
-                            {searchBlogger.length > 0 ? `All ${searchBlogger} 's blogs` : 'All blogs'}
+                            {searchBlogger.length > 0 ? <div>All <span className='text-blue-700'>{searchBlogger}</span>'s Blogs</div> : 'All blogs'}
+
                         </h1>
                         <div>
                             <i className="fas fa-book" ></i>
                         </div>
                     </div >
-                    <div className='p-2 overflow-auto ' style={useStyle}>
+                    <div className='p-2 overflow-auto' style={useStyle}>
                         {blog && blog.length ?
                             blog.filter((item) => item.author.includes(searchBlogger)).map((item, index) => {
-                                return <Blog title={item.title} author={item.author} image={item.image} key={item.id} id={item.id} onGo={test} />
+                                return <Blog title={item.title} author={item.author} image={item.image} key={item.id} id={item.id} onGo={test} date={item.date} />
                             }) : null}
-
                     </div>
 
                 </div >

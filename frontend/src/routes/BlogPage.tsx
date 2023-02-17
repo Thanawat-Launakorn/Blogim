@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-import { SyncLoader } from 'react-spinners';
+import { PropagateLoader } from 'react-spinners';
 import { blogItem } from '../../../backend/models/blog';
 export default function BlogPage({ idBlog }: any) {
 
@@ -29,14 +29,14 @@ export default function BlogPage({ idBlog }: any) {
         }, [])
 
     function deleteBlog() {
-        axios.delete(`http://localhost:3001/delete/${idBlog}`)
+        axios.delete(`http://localhost:3000/api/blog/delete/${idBlog}`)
         navigate('/')
     }
 
     return (
         <>
-            {loading ? <SyncLoader color={'blue'} loading={loading} className='text-center my-10' /> :
-                <div className='mx-auto w-full max-w-xl max-h-screen my-10 overflow-auto'>
+            {loading ? <PropagateLoader color={'blue'} loading={loading} className='w-full text-center h-10 mt-10' /> :
+                <div className='mx-auto w-full max-w-2xl  my-10'>
                     {blog.map(item => {
                         return (
                             <div key={item.id}>
@@ -44,9 +44,13 @@ export default function BlogPage({ idBlog }: any) {
                                     {item.title}
                                 </h2>
                                 <div className='w-full flex justify-between'>
-                                    <p className='text-gray-500 text-2xl font-semibold pt-4'>
-                                        written by {item.author}
-                                    </p>
+                                    <div className='relative'>
+                                        <p className='text-gray-500 text-2xl font-semibold pt-4'>
+                                            written by {item.author}
+                                        </p>
+                                        <p className='absolute bottom-0 left-0 text-blue-700 font-thin'>{item.date}</p>
+                                    </div>
+
                                     <div className='bg-blue-700 relative rounded' style={useStyleImage}>
                                         <img src={item.image} alt="img"
                                             className='object-cover absolute top-3 px-1'

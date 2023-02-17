@@ -31,7 +31,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='fill-window'>
       {show && <Navbar />}
       <Routes>
         <Route path='/' element={<Home funcShow={setShow} onGo={onGo} />} />
