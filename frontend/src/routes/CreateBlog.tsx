@@ -64,7 +64,7 @@ function CreateBlogs(props: { funcShow: any }) {
 
     return (
         <>
-            <div className='mx-auto w-full max-w-2xl mt-10 shadow-md py-3 my-3 rounded-lg'>
+            <div className='mx-auto w-full max-w-2xl mt-10 shadow-md py-3 my-3 rounded-lg mb-10'>
                 <div className='my-2'>
                     <h1 className='text-start text-black font-bold text-xl mb-7 px-8 uppercase'>
                         {inputBlog.author === changeName

@@ -58,7 +58,7 @@ export default function BlogPage({ idBlog }: any) {
 
                                     <div className='bg-blue-700 relative rounded' style={useStyleImage}>
                                         <img src={item.image} alt="img"
-                                            className='object-cover absolute top-3 px-1'
+                                            className='object-cover absolute top-3 px-1 w-full image'
                                         // style={useStyleImage}
                                         />
                                     </div>

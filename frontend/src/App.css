@@ -8,6 +8,10 @@ body {
 
 }
 
+.image {
+    height: -webkit-fill-available !important;
+}
+
 .fill-window {
     height: 100%;
     position: absolute;
@@ -43,7 +47,7 @@ body {
 }
 
 .Image {
-    width: 150px !important;
+    width: 150px;
     height: 150px;
     border-radius: 50%;
     cursor: pointer;

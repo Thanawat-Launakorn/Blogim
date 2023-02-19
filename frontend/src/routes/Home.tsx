@@ -37,7 +37,7 @@ function Home(props: { funcShow: any, onGo: any }) {
     return (
         <>
             {loading ? <PropagateLoader color={'blue'} loading={loading} className='w-full text-center h-10 mt-10 mx-auto' /> :
-                <div className='mx-auto w-full max-w-2xl mt-10 flex flex-col justify-center'>
+                <div className='mx-auto w-full max-w-2xl mt-10 flex flex-col justify-center mb-10'>
                     <input
                         placeholder='Search blogger...'
                         className='mx-auto max-w-md mb-2 p-2 bg-gray-200 shadow rounded focus:bg-white'

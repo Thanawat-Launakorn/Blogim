@@ -26,7 +26,7 @@ function Blog({ title, author, image, onGo, id, date }: any) {
                 <img
                     src={`${image}`}
                     alt="image-profile"
-                    className='object-cover h-10 w-10' />
+                    className='object-cover h-10 w-10 image' />
             </div>
         </div>
     )
