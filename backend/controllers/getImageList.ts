@@ -1,9 +1,7 @@
 import { RequestHandler } from "express";
-import { blog } from "../models/blog";
+import { image } from "../models/image";
 import { CommomResponseBody } from "../src/main";
 
 export default <RequestHandler<unknown, CommomResponseBody>>((req, res) => {
-    res.send({
-        data: blog
-    })
+    res.send({ data: image })
 })

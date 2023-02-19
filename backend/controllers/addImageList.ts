@@ -1,14 +1,14 @@
 import { RequestHandler } from "express";
-import { addBlog } from "../models/blog";
+import { addImage } from "../models/image";
 import { CommomResponseBody } from "../src/main";
+
 interface RequestBody {
     title: string,
-    body: string,
+    description: string,
     author: string,
-    image?: string,
-    date: any | Date
+    image: string
 }
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
-    const id = addBlog(req.body) 
+    const id = addImage(req.body)
     res.status(201).send({ data: id })
 })

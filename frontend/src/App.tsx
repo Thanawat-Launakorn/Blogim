@@ -10,6 +10,7 @@ import {
   Route,
 } from 'react-router-dom'
 import BlogPage from './routes/BlogPage'
+import CreateImage from './routes/CreateImage'
 function App() {
   const element = document.documentElement
   const [theme, setTheme] = useState('light' as string)
@@ -31,12 +32,13 @@ function App() {
 
 
   return (
-    <div className='fill-window'>
+    <div className='fill-window '>
       {show && <Navbar />}
       <Routes>
         <Route path='/' element={<Home funcShow={setShow} onGo={onGo} />} />
         <Route path='/create' element={<CreateBlogs funcShow={setShow} />} />
         <Route path={path} element={<BlogPage idBlog={pathBlog} />} />
+        <Route path='/createImage' element={<CreateImage />} />
         <Route path='*' element={<ErrorPage funcShow={setShow} />} />
       </Routes>
       {show && <Footer />}

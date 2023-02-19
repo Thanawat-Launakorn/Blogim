@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { deleteBlog } from "../models/blog";
-import { CommomResponseBody } from "../src";
+import { CommomResponseBody } from "../src/main";
 interface RequestBody {
     id: string
 }

@@ -7,7 +7,7 @@ import { blogItem } from '../../../backend/models/blog';
 export default function BlogPage({ idBlog }: any) {
 
     const [blog, setBlog] = useState<blogItem[]>([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false as boolean)
 
     const navigate = useNavigate()
     const useStyleBody = {
@@ -18,20 +18,25 @@ export default function BlogPage({ idBlog }: any) {
         height: '140px'
     }
 
-    useEffect(
-        () => {
-            axios.get(`http://localhost:3000/api/blog/get/${idBlog}`).then((res) => setBlog(res.data.data))
-            setLoading(true)
-            setTimeout(() => {
-                setLoading(false)
-            }, 3000)
-
-        }, [])
-
-    function deleteBlog() {
+    const deleteBlog = () => {
         axios.delete(`http://localhost:3000/api/blog/delete/${idBlog}`)
         navigate('/')
     }
+
+    const loadingPage = async () => {
+        await axios.get(`http://localhost:3000/api/blog/get/${idBlog}`).then((res) => setBlog(res.data.data))
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }
+
+    useEffect(
+        () => {
+            loadingPage()
+        }, [])
+
+
 
     return (
         <>
