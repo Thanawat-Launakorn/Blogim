@@ -1,47 +1,63 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import CreateBlogs from './routes/CreateBlog'
-import Home from './routes/Home'
-import ErrorPage from './routes/ErrorPage'
+import Navbar from './components/Layout/Navbar'
+import Footer from './components/Layout/Footer'
+import CreateBlogs from './pages/CreateBlog'
+import Home from './pages/Home'
+import ErrorPage from './pages/ErrorPage'
 import {
+  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom'
-import BlogPage from './routes/BlogPage'
-import CreateImage from './routes/CreateImage'
+import BlogPage from './pages/BlogPage'
+import CreateImage from './pages/CreateImage'
+import blogItem from './models/Iblog'
+import Layout from './components/Layout'
+import ThemeProvider from './context/ThemeProvider'
+import LoadingProvider from './context/LoadingProvider'
+
+
 function App() {
   const element = document.documentElement
-  const [theme, setTheme] = useState('light' as string)
   const [show, setShow] = useState(true as boolean)
   const [pathBlog, setPathBlog] = useState()
   const path = `/blog/${pathBlog}`
-  const onGo = (id: any) => {
+  const onGo = (id: Pick<blogItem, 'id'> | any) => {
     setPathBlog(id)
   }
-  useEffect(() => {
-    switch (theme) {
-      case 'dark':
-        element.classList.add('dark')
-        break;
-      case 'light':
-        element.classList.remove('dark')
-    }
-  }, [])
 
+  interface IRoute {
+    path: string,
+    element: React.ReactNode
+  }
+  const routes: Array<IRoute> = [
+    { path: '/', element: <Home /> },
+    { path: '/create', element: <CreateBlogs funcShow={setShow} /> },
+    { path: '/createImage', element: <CreateImage /> },
+    { path: `/blog/${pathBlog}`, element: <BlogPage /> },
+    { path: '/*', element: <ErrorPage funcShow={setShow} /> }
+
+  ]
 
   return (
     <div className='fill-window '>
-      {show && <Navbar />}
-      <Routes>
-        <Route path='/' element={<Home funcShow={setShow} onGo={onGo} />} />
-        <Route path='/create' element={<CreateBlogs funcShow={setShow} />} />
-        <Route path={path} element={<BlogPage idBlog={pathBlog} />} />
-        <Route path='/createImage' element={<CreateImage />} />
-        <Route path='*' element={<ErrorPage funcShow={setShow} />} />
-      </Routes>
-      {show && <Footer />}
+      <BrowserRouter>
+        <ThemeProvider>
+          <LoadingProvider>
+            {show && <Navbar />}
+            <Layout>
+              <Routes>
+                {routes.map(({ path, element }) => {
+                  return <Route path={path} element={element} />
+                })}
+              </Routes>
+            </Layout>
+            {show && <Footer />}
+          </LoadingProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+
     </div>
   )
 }

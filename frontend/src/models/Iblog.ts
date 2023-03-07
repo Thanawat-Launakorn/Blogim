@@ -4,5 +4,6 @@ export default interface blogItem {
     body: string,
     author: string,
     image?: string,
-    date: any | Date
+    date: any | Date,
+
 }

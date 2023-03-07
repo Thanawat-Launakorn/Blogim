@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { addImage } from "../models/image";
-import { CommomResponseBody } from "../src/main";
+import { addImage } from "../../../models/image";
+import { CommomResponseBody } from "../../../src/main";
 
 interface RequestBody {
     title: string,
@@ -10,5 +10,5 @@ interface RequestBody {
 }
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
     const id = addImage(req.body)
-    res.status(201).send({ data: id })
+    res.status(201).send({ res: id })
 })

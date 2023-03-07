@@ -63,6 +63,8 @@ export let blog: blogItem[] = [
     }
 
 ]
+
+
 export function addBlog(data: Omit<blogItem, 'id'>) {
     const id = uuid()
     blog.push({
@@ -73,7 +75,7 @@ export function addBlog(data: Omit<blogItem, 'id'>) {
 }
 
 export function findBlog(data: Pick<blogItem, 'id'>) {
-    const idBlog = blog.filter((it: any) => {
+    const idBlog = blog.filter((it: blogItem) => {
         return it.id === data.id
     })
     return idBlog
@@ -81,9 +83,17 @@ export function findBlog(data: Pick<blogItem, 'id'>) {
 }
 
 export function deleteBlog(data: Pick<blogItem, 'id'>) {
-    blog = blog.filter((it: any) => {
+    blog = blog.filter((it: blogItem) => {
         return it.id !== data.id
     })
     return blog
 
+}
+
+export function searchBlog(data: Pick<blogItem, 'author'>) {
+    const authorBlog = blog.filter((it: blogItem) => {
+        return it.author === data.author
+    })
+
+    return authorBlog
 }

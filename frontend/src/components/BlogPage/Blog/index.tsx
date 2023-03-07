@@ -1,6 +1,6 @@
 import React from 'react'
-
-function Blog({ title, author, image, onGo, id, date }: any) {
+import blogItem from '../../../models/Iblog'
+function Blog({ title, author, date, image, onGo, id }: blogItem | any) {
     const useStyle = {
         height: '4rem'
     }

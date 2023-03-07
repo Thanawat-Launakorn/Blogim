@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { findImage, imageItem } from "../models/image";
-import { CommomResponseBody } from "../src/main";
+import { findImage, imageItem } from "../../../models/image";
+import { CommomResponseBody } from "../../../src/main";
 
 interface RequestBody {
     id: string
@@ -8,5 +8,5 @@ interface RequestBody {
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
     const idImage = <RequestBody>req.params
     const response = findImage(idImage)
-    res.send({ data : response})
+    res.send({ res : response})
 })

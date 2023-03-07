@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { addBlog } from "../models/blog";
-import { CommomResponseBody } from "../src/main";
+import { addBlog } from "../../../models/blog";
+import { CommomResponseBody } from "../../../src/main";
 interface RequestBody {
     title: string,
     body: string,
@@ -10,5 +10,5 @@ interface RequestBody {
 }
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
     const id = addBlog(req.body) 
-    res.status(201).send({ data: id })
+    res.status(201).send({ res: id })
 })

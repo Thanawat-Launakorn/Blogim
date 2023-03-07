@@ -2,18 +2,19 @@ import express, { Router } from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import getBlog from '../controllers/getBlogList'
-import addBlog from '../controllers/addBlogList'
-import getBlogId from '../controllers/getBlogIdList'
-import deleteBlog from '../controllers/deleteBlogList'
-import getImage from '../controllers/getImageList'
-import addImage from '../controllers/addImageList'
-import getImageId from '../controllers/getImageIdList'
-import deleteImage from '../controllers/deleteImageList'
+import getBlog from '../controllers/GET/blog/getBlogList'
+import addBlog from '../controllers/POST/blog/addBlogList'
+import getBlogId from '../controllers/GET/blog/getBlogIdList'
+import deleteBlog from '../controllers/DELETE/blog/deleteBlogList'
+import getImage from '../controllers/GET/image/getImageList'
+import addImage from '../controllers/POST/image/addImageList'
+import getImageId from '../controllers/GET/image/getImageIdList'
+import deleteImage from '../controllers/DELETE/image/deleteImageList'
+import getBlogAuthor from '../controllers/GET/blog/getBlogAuthorList'
 const app = express()
 const port = Number(process.env.PORT || 3000)
 export interface CommomResponseBody {
-    data?: any
+    res?: any
 }
 
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -27,6 +28,7 @@ dotenv.config()
 app.get('/api/blog/get', getBlog)
 app.post('/api/blog/create', addBlog)
 app.get('/api/blog/get/:id', getBlogId)
+app.get('/api/blog/search/:author', getBlogAuthor)
 app.delete('/api/blog/delete/:id', deleteBlog)
 
 //imageRoute

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom'
+import { ThemeContext } from '../../context/ThemeProvider';
 // 
 function Navbar() {
-
+    const { theme, setTheme } = useContext(ThemeContext)
+    const isDark = theme === 'dark'
     // <i class="fa-solid fa-moon"></i> ##moon
     // <i class="fa-solid fa-lightbulb"></i> ##light
     // <i className="fa-brands fa-github">< ##github
@@ -37,6 +39,9 @@ function Navbar() {
                             <NavLink to='/createImage'>New Image</NavLink>
                         </li>
                         <li>
+                            <i className="fas fa-moon"></i> <button type='button' onClick={() => {
+                                setTheme && setTheme(isDark ? 'light' : 'dark')
+                            }}>Dark</button>
                         </li>
                     </ul>
                 </div>

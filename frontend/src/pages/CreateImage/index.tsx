@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import imageItem from '../models/Iimage'
+import imageItem from '../../models/Iimage'
 
 export default function CreateImage() {
   const [inputImage, setInputImage] = useState<Partial<imageItem>>({})

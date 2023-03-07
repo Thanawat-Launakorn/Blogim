@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
 import { PropagateLoader } from 'react-spinners';
-import { blogItem } from '../../../backend/models/blog';
+import { blogItem } from '../../../../backend/models/blog';
 export default function BlogPage({ idBlog }: any) {
 
     const [blog, setBlog] = useState<blogItem[]>([])
