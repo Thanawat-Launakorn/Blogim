@@ -35,7 +35,7 @@ function App() {
     { path: '/', element: <Home /> },
     { path: '/create', element: <CreateBlogs funcShow={setShow} /> },
     { path: '/createImage', element: <CreateImage /> },
-    { path: `/blog/${pathBlog}`, element: <BlogPage /> },
+    { path: `/blog/:id`, element: <BlogPage /> },
     { path: '/*', element: <ErrorPage funcShow={setShow} /> }
 
   ]
@@ -49,7 +49,7 @@ function App() {
             <Layout>
               <Routes>
                 {routes.map(({ path, element }) => {
-                  return <Route path={path} element={element} />
+                  return <Route path={path} element={element} key={path} />
                 })}
               </Routes>
             </Layout>

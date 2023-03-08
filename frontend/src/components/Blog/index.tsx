@@ -1,16 +1,28 @@
 import React from 'react'
-import blogItem from '../../../models/Iblog'
-function Blog({ title, author, date, image, onGo, id }: blogItem | any) {
+import blogItem from '../../models/Iblog'
+type BlogProps = {
+    title: string,
+    author: string,
+    date: any,
+    image?: string,
+
+}
+function Blog({
+    title,
+    author,
+    date,
+    image }
+    : BlogProps) {
     const useStyle = {
         height: '4rem'
     }
 
-    function handleClick() {
-        onGo(id)
-    }
+    // function handleClick() {
+    //     onGo(id)
+    // }
 
     return (
-        <div className='w-full flex justify-between  p-3 mb-4 cursor-pointer shadow-md hover:shadow-lg' onClick={handleClick}>
+        <div className='w-full flex justify-between  p-3 mb-4 cursor-pointer shadow-md hover:shadow-lg' >
             <div className='flex flex-col '>
                 <h1 className='text-blue-700  font-bold text-xl tracking-wide '>
                     {title}

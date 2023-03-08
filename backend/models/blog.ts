@@ -60,7 +60,7 @@ export let blog: blogItem[] = [
         author: 'thanawat',
         image: '',
         date: ''
-    }
+    },
 
 ]
 

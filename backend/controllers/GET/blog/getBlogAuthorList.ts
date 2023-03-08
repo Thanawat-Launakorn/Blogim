@@ -1,6 +1,12 @@
 import { RequestHandler } from "express";
+import { searchBlog } from "../../../models/blog";
 import { CommomResponseBody } from "../../../src/main";
 
-export default <RequestHandler<unknown, CommomResponseBody, unknown>>((req, res) => {
-    res.send({ res: null })
+interface RequestBody {
+    author: string
+}
+export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
+    const authorBlog = <RequestBody>req.params
+    const response = searchBlog(authorBlog)
+    res.send({ res: response })
 })
