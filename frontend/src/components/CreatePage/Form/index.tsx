@@ -5,6 +5,7 @@ import InputAuthor from '../InputAuthor'
 import InputImage from '../InputImage'
 import InputTitle from '../InputTitle'
 import TextAreaBody from '../TextAreaBody'
+import LabelBlog from '../Label'
 type FormProps = {
     className?: string,
     onSubmit: FormEventHandler<HTMLFormElement>
@@ -38,7 +39,7 @@ export default function Form({
     onClickImageImage,
     valueInputAuthor,
     valueInputImage,
-    valueInputTitle, 
+    valueInputTitle,
     valueTextAreaBody,
     preview,
     changeTextButton,
@@ -57,7 +58,13 @@ export default function Form({
                 type='file'
                 value={valueInputImage}
                 preview={preview}
+                className='w-full mx-auto buttonImage'
 
+
+            />
+            <LabelBlog
+                className='block uppercase tracking-wide text-gray-700 text-xs font-semibold my-2'
+                label='author : '
             />
             <InputAuthor
                 name='author'
@@ -66,6 +73,12 @@ export default function Form({
                 value={valueInputAuthor}
                 className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
                 placeholder='Your name'
+                autoComplete='off'
+            />
+
+            <LabelBlog
+                className='block uppercase tracking-wide text-gray-700 text-xs font-semibold my-2'
+                label='title : '
             />
             <InputTitle
                 name='title'
@@ -74,6 +87,13 @@ export default function Form({
                 value={valueInputTitle}
                 className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
                 placeholder='My blog'
+                autoComplete='off'
+
+            />
+
+            <LabelBlog
+                className='block uppercase tracking-wide text-gray-700 text-xs font-semibold my-2'
+                label='body : '
             />
             <TextAreaBody
                 name='body'
@@ -81,13 +101,12 @@ export default function Form({
                 rows={7}
                 value={valueTextAreaBody}
                 className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
-
                 placeholder='Type your story'
             />
             <ButtonBlog
                 changeText={changeTextButton}
                 onClick={onClickButton}
-                className='text-white bg-blue-700 hover:bg-blue-500 shadow rounded-md px-4 py-2 font-semibold text-sm'
+                className='text-white bg-blue-700 hover:bg-blue-500 shadow rounded-md px-4 py-2 font-semibold text-sm my-2 '
             />
         </form>
     )

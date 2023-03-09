@@ -5,19 +5,21 @@ type authorProps = {
   placeholder?: string,
   name: string,
   value?: string,
-  onChange: React.ChangeEventHandler<HTMLInputElement>
-}
+  onChange: React.ChangeEventHandler<HTMLInputElement>,
+  autoComplete?: string
+} 
 export default function InputAuthor({
   type,
   className,
   placeholder,
   name,
   value,
-  onChange
+  onChange,
+  autoComplete
 }: authorProps) {
   return (
     <div className='input-author'>
-      <input {...{ type, className, placeholder, name, value, onChange }} />
+      <input {...{ type, className, placeholder, name, value, onChange, autoComplete }} />
     </div>
   )
 }

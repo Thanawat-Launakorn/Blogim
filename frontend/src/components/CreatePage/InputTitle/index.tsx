@@ -5,7 +5,8 @@ type InputTitleProps = {
     placeholder?: string,
     name: string,
     value?: string,
-    onChange: React.ChangeEventHandler<HTMLInputElement>
+    onChange: React.ChangeEventHandler<HTMLInputElement>,
+    autoComplete?: string
 }
 export default function InputTitle({
     type,
@@ -13,11 +14,12 @@ export default function InputTitle({
     placeholder,
     name,
     value,
-    onChange
+    onChange,
+    autoComplete
 }: InputTitleProps) {
     return (
         <div className='input-title'>
-            <input {...{type, className, placeholder, name, value, onChange}} />
+            <input {...{type, className, placeholder, name, value, onChange, autoComplete}} />
         </div>  
     )
 }

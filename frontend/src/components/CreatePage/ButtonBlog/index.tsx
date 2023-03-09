@@ -6,10 +6,13 @@ type ButtonBlogProps = {
 }
 export default function ButtonBlog({ className, onClick, changeText }: ButtonBlogProps) {
   return (
-    <button
-      {...{ className, onClick }}
-    >
-      {changeText}
-    </button>
+    <div className='text-end'>
+      <button
+        {...{ className, onClick }}
+      >
+        {changeText}
+      </button>
+    </div>
+
   )
 }

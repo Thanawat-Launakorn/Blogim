@@ -1,12 +1,15 @@
 import React from 'react'
 type LabelProps = {
     className?: string,
-    label?: string
+    label: string
 }
-export default function Label({ className, label }: LabelProps) {
+export default function LabelBlog({ className, label }: LabelProps) {
     return (
-        <label className={`${className}`}>
-            {label}
-        </label>
+        <div className='label'>
+            <label className={`${className}`}>
+                {label}
+            </label>
+        </div>
+
     )
 }

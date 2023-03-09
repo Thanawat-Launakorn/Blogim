@@ -10,7 +10,7 @@ import Form from '../../components/CreatePage/Form'
 
 function CreateBlogs(props: { funcShow: any }) {
 
-    const [inputBlog, setInputBlog] = useState<Partial<blogItem>>({})
+    const [inputBlog, setInputBlog] = useState<Partial<blogItem> | any>({})
     const [changeAddBlog, setChangeAddBlog] = useState('Add Blog')
     const [changeName, setChangeName] = useState('._.' as any)
     const navigate = useNavigate()
@@ -70,7 +70,6 @@ function CreateBlogs(props: { funcShow: any }) {
             }
             reader.readAsDataURL(image)
             reader.onload = () => {
-
                 inputBlog.image = reader.result
             }
 
@@ -119,7 +118,7 @@ function CreateBlogs(props: { funcShow: any }) {
                     onSubmit={handleSubmit}
                     preview={preview}
                     valueInputAuthor={inputBlog.author}
-                    valueInputImage={inputBlog.image}
+                    valueInputImage=''
                     valueInputTitle={inputBlog.title}
                     valueTextAreaBody={inputBlog.body}
                     className='bg-white px-8 pt-4 pb-0 mb-4'
