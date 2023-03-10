@@ -98,7 +98,7 @@ export default function Form({
             <TextAreaBody
                 name='body'
                 onChange={onChangeInputTextAreaBody}
-                rows={7}
+                rows={4}
                 value={valueTextAreaBody}
                 className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
                 placeholder='Type your story'

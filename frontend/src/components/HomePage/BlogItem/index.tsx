@@ -1,5 +1,5 @@
 import React from 'react'
-import blogItem from '../../models/Iblog'
+import blogItem from '../../../models/Iblog'
 type BlogProps = {
     title: string,
     author: string,

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import * as ApiUserBlog from '../../services/API/userBlog.API'
+import { useNavigate, useParams } from 'react-router-dom'
+import axios, { AxiosResponse } from 'axios'
 import { PropagateLoader } from 'react-spinners';
 import { blogItem } from '../../../../backend/models/blog';
-export default function BlogPage({ idBlog }: any) {
+import useLoading from '../../core/hooks/useLoading';
+import Loader from '../../components/Loader';
+export default function BlogPage() {
 
-    const [blog, setBlog] = useState<blogItem[]>([])
-    const [loading, setLoading] = useState(false as boolean)
 
+
+    const [blog, setBlog] = useState<blogItem[] | any>([])
+    const { loading, setLoading } = useLoading()
+    const { id } = useParams()
     const navigate = useNavigate()
     const useStyleBody = {
         backgroundColor: '#DCFBFF'
@@ -17,31 +22,36 @@ export default function BlogPage({ idBlog }: any) {
         height: '140px'
     }
 
-    const deleteBlog = () => {
-        axios.delete(`http://localhost:3000/api/blog/delete/${idBlog}`)
+    const deleteBlog = async () => {
+        await ApiUserBlog.DeleteBlog(id)
         navigate('/')
     }
 
-    const loadingPage = async () => {
-        await axios.get(`http://localhost:3000/api/blog/get/${idBlog}`).then((res) => setBlog(res.data.data))
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-    }
-
-    useEffect(
-        () => {
-            loadingPage()
-        }, [])
-
-
+    useEffect(() => {
+        ; (async () => {
+            type dataProps = {
+                res?: any
+            }
+            const { data } = await ApiUserBlog.UserBlogId(id)
+            const value = data as dataProps
+            setBlog(value.res)
+        })()
+    },
+        []
+    )
 
     return (
         <>
-            {loading ? <PropagateLoader color={'blue'} loading={loading} className='w-full text-center h-10 mt-10' /> :
+            {loading
+                ? <Loader
+                    color='blue'
+                    loading={loading}
+                    classname='w-full text-center mx-auto mt-10'
+
+                /> :
                 <div className='mx-auto w-full max-w-2xl  my-10'>
-                    {blog.map(item => {
+
+                    {blog.map((item: blogItem) => {
                         return (
                             <div key={item.id}>
                                 <h2 className='text-blue-700 text-7xl font-bold tracking-wide'>

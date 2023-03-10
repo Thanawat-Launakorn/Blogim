@@ -8,23 +8,24 @@ type InfiniteScrollProps<T> = {
         idx: number,
         array: Array<T>,
         key: string | number
-    }) => React.ReactNode
-    className?: string
-    renderEmptyList?: () => React.ReactNode
-    // key: string | number
-    searchBlogger: string
+    }) => React.ReactNode,
+    className?: string,
+    renderEmptyList?: () => React.ReactNode,
+    style: React.CSSProperties
+
 
 }
 export default function InfiniteScroll({
     items,
     renderItem,
     className,
-    searchBlogger,
+    style,
+
     // key
 
-}: InfiniteScrollProps<blogItem>) {
+}: InfiniteScrollProps<blogItem>): JSX.Element {
     return (
-        <div className={`${className}`}>
+        <div className={`${className}`} style={style}>
             {items?.map((item, idx, array) => {
                 return (
                     <React.Fragment key={item.id}>
@@ -32,6 +33,6 @@ export default function InfiniteScroll({
                     </React.Fragment>
                 )
             })}
-        </div>
+        </div >
     )
 }

@@ -6,6 +6,7 @@ interface RequestBody {
 }
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
     const idBlog = <RequestBody>req.params
+
     const response = findBlog(idBlog)
     res.send({ res: response })
 

@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import React, { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
-import Blog from '../../components/Blog';
+import Blog from '../../components/HomePage/BlogItem';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import blogItem from '../../models/Iblog';
@@ -8,7 +8,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import Loader from '../../components/Loader';
 import useLoading from '../../core/hooks/useLoading';
 import SearchField from '../../models/IsearchField'
-import * as ApiUserBlog from '../../services/API/userBlog.api'
+import * as ApiUserBlog from '../../services/API/userBlog.API'
 import useDebounce from '../../core/hooks/useDebounce';
 import Form from '../../components/HomePage/Form';
 import Label from '../../components/HomePage/Label';
@@ -22,19 +22,9 @@ export default function Home() {
     const { loading, setLoading } = useLoading();
     const delay = 3000 as number
     const debounceSearch = useDebounce(searchBlogger, delay)
-
-
-
     const useStyle = {
-        height: '28rem'
+        height: '23rem'
     }
-
-
-    function test(id: Pick<blogItem, 'id'>) {
-        // props.onGo(id)
-        navigate(`/blog/${id}`)
-    }
-
     const handleSearchField = useCallback(
         async ({ searchField }: SearchField) => {
             try {
@@ -48,7 +38,7 @@ export default function Home() {
 
                     setBlogs(value.res)
                     console.log(value.res);
-                    
+
                     setError('')
                     return
                 }
@@ -93,8 +83,6 @@ export default function Home() {
         setSearchBlogger(e.target.value)
     }
 
-
-
     return (
         <div className='home'>
 
@@ -115,7 +103,7 @@ export default function Home() {
                         <InfiniteScroll
                             className='p-2 overflow-auto infinite-scroll h-96'
                             items={blogs}
-                            searchBlogger=''
+                            style={useStyle}
                             renderItem={({
                                 item,
                                 key,

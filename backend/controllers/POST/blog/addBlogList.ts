@@ -9,6 +9,6 @@ interface RequestBody {
     date: any | Date
 }
 export default <RequestHandler<unknown, CommomResponseBody, RequestBody>>((req, res) => {
-    const id = addBlog(req.body) 
-    res.status(201).send({ res: id })
+    const data = addBlog(req.body)
+    res.status(201).send({ res: data })
 })

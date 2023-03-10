@@ -2,13 +2,13 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import blogItem from '../../models/Iblog'
-
+import * as ApiUserBlog from '../../services/API/userBlog.API'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import Form from '../../components/CreatePage/Form'
 
 
 
-function CreateBlogs(props: { funcShow: any }) {
+export default function CreateBlogs(props: { funcShow: any }) {
 
     const [inputBlog, setInputBlog] = useState<Partial<blogItem> | any>({})
     const [changeAddBlog, setChangeAddBlog] = useState('Add Blog')
@@ -17,6 +17,17 @@ function CreateBlogs(props: { funcShow: any }) {
     const fileInputRef = useRef<HTMLInputElement | any>()
     const [image, setImage] = useState<File>()
     const [preview, setPreview] = useState<string | any>()
+    const [error, setError] = useState('')
+    const wait = (ms: number) => new Promise((empty: TimerHandler) => setTimeout(empty, ms));
+
+    const createAutoDate = () => {
+        const date = new Date().getDate()
+        const month = new Date().getMonth() + 1
+        const year = new Date().getFullYear().toString().slice(2)
+        const hour = new Date().getHours()
+        const minute = new Date().getMinutes()
+        inputBlog.date = `${date}.${month}.${year}, ${hour}:${minute > 9 ? minute : '0' + minute.toString()}`
+    }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputBlog((prevItem: any) => {
@@ -40,26 +51,28 @@ function CreateBlogs(props: { funcShow: any }) {
 
     const handleClick = async () => {
         try {
-            const wait = (ms: number) => new Promise((empty: TimerHandler) => setTimeout(empty, ms));
-            const date = new Date().getDate()
-            const month = new Date().getMonth() + 1
-            const year = new Date().getFullYear().toString().slice(2)
-            const hour = new Date().getHours()
-            const minute = new Date().getMinutes()
-            inputBlog.date = `${date}.${month}.${year}, ${hour}:${minute > 9 ? minute : '0' + minute.toString()}`
-            await axios.post('http://localhost:3000/api/blog/create', inputBlog)
+            createAutoDate()
+            await ApiUserBlog.CreateUserBlog(inputBlog)
             setChangeAddBlog('Adding Blog...')
             setChangeName(inputBlog.author)
             await wait(2000)
-            navigate('/')
+
+            setError('')
         } catch (error) {
             alert(error)
+            console.error('❌ Error', error)
+            setError('Something went wrong')
+        }
+        finally {
+            navigate('/')
         }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
     }
+
+
 
     useEffect(() => {
         props.funcShow(true)
@@ -81,28 +94,7 @@ function CreateBlogs(props: { funcShow: any }) {
 
     return (
         <div className='createBlog-page'>
-            <div className='mx-auto w-full max-w-md mt-10 shadow-md py-3 my-3 rounded-lg mb-10'>
-                <div className='my-2'>
-                    <h1 className='text-start text-black font-bold text-xl mb-7 px-8 uppercase'>
-                        {inputBlog.author === changeName
-                            ?
-                            <div className='flex'>
-                                <div>Hi&nbsp;</div>
-                                <span className='text-blue-700'>{changeName}&nbsp;</span>
-                                <div>welcome to blogim!</div>
-                            </div>
-                            :
-                            <div className='flex'>
-                                <div>Hello&nbsp;</div>
-                                <span className='text-blue-700'>{changeName}&nbsp;</span>
-                                <div>what 's your name ?</div>
-                            </div>
-                        }
-
-                    </h1>
-                    <hr className='w-full' />
-
-                </div>
+            <div className='mx-auto w-full max-w-lg mt-10  py-3 my-3  mb-10 '>
 
                 <Form
                     changeTextButton={changeAddBlog}
@@ -123,7 +115,6 @@ function CreateBlogs(props: { funcShow: any }) {
                     valueTextAreaBody={inputBlog.body}
                     className='bg-white px-8 pt-4 pb-0 mb-4'
                 />
-
             </div>
 
         </div>
@@ -131,4 +122,3 @@ function CreateBlogs(props: { funcShow: any }) {
     )
 }
 
-export default CreateBlogs

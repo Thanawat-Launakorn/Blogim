@@ -19,7 +19,6 @@ import LoadingProvider from './context/LoadingProvider'
 
 
 function App() {
-  const element = document.documentElement
   const [show, setShow] = useState(true as boolean)
   const [pathBlog, setPathBlog] = useState()
   const path = `/blog/${pathBlog}`
