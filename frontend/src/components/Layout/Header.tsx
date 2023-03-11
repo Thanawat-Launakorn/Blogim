@@ -14,7 +14,7 @@ export default function Header() {
 
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-900">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
-                <a href="#" className="flex items-center">
+                <a href="https://blogim-client.onrender.com/" className="flex items-center">
                     <h1>
                         <span className="text-blue-700 self-center text-5xl font-bold whitespace-nowrap lg:ml-20">Blogim!</span>
                     </h1>
