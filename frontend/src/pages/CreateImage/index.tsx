@@ -1,33 +1,102 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, FormEvent } from 'react'
+import Form from '../../components/CreateImagePage/Form'
 import imageItem from '../../models/Iimage'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import * as ApiUserBlog from '../../services/API/userBlog.API'
+import { wait } from '../../utils'
 
 export default function CreateImage() {
-  const [inputImage, setInputImage] = useState<Partial<imageItem>>({})
-  const handleChange = () => {
+  const [inputImage, setInputImage] = useState<Partial<imageItem> | any>({})
+  const [changeAddImage, setChangeAddImage] = useState('Add Image' as string)
+  const [image, setImage] = useState<File>()
+  const fileInputRef = useRef<HTMLInputElement | any>()
+  const [preview, setPreview] = useState<string | any>()
+  const [err, setError] = React.useState('')
+  const navigate = useNavigate()
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setInputImage((prevImage: imageItem | any) => {
+      return { ...prevImage, [e.target.name]: e.target.value }
+    })
   }
+
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement> | any) => {
+    const file = e.target.files[0]
+    file && setImage(file)
+  }
+
+  const handleClickImage = () => {
+    setPreview(null)
+  }
+
+  const handleButtonImage = (e: React.FormEvent) => {
+    e.preventDefault()
+    fileInputRef.current.click()
+  }
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+  }
+
+  const handleClick = async () => {
+    try {
+
+      await ApiUserBlog.CreateUserImage(inputImage)
+      setChangeAddImage('Adding Image...')
+      await wait(200)
+      setError('')
+
+    } catch (error) {
+      alert(error)
+      console.error('❌ Error', error)
+      setError('Something went wrong')
+    }
+
+    finally {
+      navigate('/')
+    }
+  }
+
+  React.useEffect(() => {
+    if (image) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result as string)
+      }
+      reader.readAsDataURL(image)
+      reader.onload = () => {
+        inputImage.image = reader.result
+      }
+
+    } else {
+      setPreview(null)
+    }
+
+  }, [image])
+
   return (
     <>
-      <div className='mx-auto w-full max-w-sm mt-10'>
-
-        <form className='bg-white px-8 pt-0 pb-0 mb-4 ' onSubmit={(e) => e.preventDefault()}>
-          <div className="flex justify-center">
-            <div className="rounded-lg shadow-lg bg-white max-w-sm">
-              <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" alt="" />
-              </a>
-              <div className="p-6">
-                <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                <p className="text-gray-700 text-base mb-4">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <button type="button" className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-              </div>
-            </div>
-          </div>
-        </form>
-
+      <div className='mx-auto w-full max-w-xs mt-20 mb-24'>
+        <Form
+          onSubmit={handleSubmit}
+          changeText={changeAddImage}
+          fileInputRef={fileInputRef}
+          onClickButtonImage={handleButtonImage}
+          icon={faCamera}
+          onChangeDescription={handleChange}
+          onChangeImage={handleChangeImage}
+          onChangeTitle={handleChange}
+          onClickButton={handleClick}
+          onClickImage={handleClickImage}
+          onChangeAuthor={handleChange}
+          preview={preview}
+          valueInputDescription={inputImage.description}
+          valueInputImage={''}
+          valueInputTitle={inputImage.title}
+          valueInputAuthor={inputImage.author}
+          className='bg-white shadow rounded-xl'
+        />
       </div>
     </>
   )

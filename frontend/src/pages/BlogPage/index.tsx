@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as ApiUserBlog from '../../services/API/userBlog.API'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios, { AxiosResponse } from 'axios'
-import { PropagateLoader } from 'react-spinners';
 import { blogItem } from '../../../../backend/models/blog';
 import useLoading from '../../core/hooks/useLoading';
 import Loader from '../../components/Loader';
@@ -13,6 +11,7 @@ export default function BlogPage() {
     const [blog, setBlog] = useState<blogItem[] | any>([])
     const { loading, setLoading } = useLoading()
     const { id } = useParams()
+    const delay = 3000 as number
     const navigate = useNavigate()
     const useStyleBody = {
         backgroundColor: '#DCFBFF'
@@ -29,12 +28,26 @@ export default function BlogPage() {
 
     useEffect(() => {
         ; (async () => {
-            type dataProps = {
-                res?: any
+            try {
+                setLoading(true)
+                type dataProps = {
+                    res?: any
+                }
+                const { data } = await ApiUserBlog.UserBlogId(id)
+                const value = data as dataProps
+                setBlog(value.res)
             }
-            const { data } = await ApiUserBlog.UserBlogId(id)
-            const value = data as dataProps
-            setBlog(value.res)
+            catch (err) {
+                console.log(err);
+
+            }
+
+            finally {
+                setTimeout(() => {
+                    setLoading(loading)
+                }, delay)
+            }
+
         })()
     },
         []

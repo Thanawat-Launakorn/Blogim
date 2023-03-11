@@ -100,13 +100,13 @@ export default function Form({
                 onChange={onChangeInputTextAreaBody}
                 rows={4}
                 value={valueTextAreaBody}
-                className='border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
+                className='textareaBody border-2 appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700 textarea'
                 placeholder='Type your story'
             />
             <ButtonBlog
                 changeText={changeTextButton}
                 onClick={onClickButton}
-                className='text-white bg-blue-700 hover:bg-blue-500 shadow rounded-md px-4 py-2 font-semibold text-sm my-2 '
+                className='text-white bg-blue-700 hover:bg-blue-500 shadow rounded-md px-4 py-2 font-semibold text-xs my-2 '
             />
         </form>
     )

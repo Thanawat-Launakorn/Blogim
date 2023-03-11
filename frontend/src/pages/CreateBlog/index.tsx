@@ -1,25 +1,24 @@
-import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import blogItem from '../../models/Iblog'
 import * as ApiUserBlog from '../../services/API/userBlog.API'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import Form from '../../components/CreatePage/Form'
+import Form from '../../components/CreateBlogPage/Form'
+import { wait } from '../../utils'
 
 
 
-export default function CreateBlogs(props: { funcShow: any }) {
+export default function CreateBlogs() {
 
     const [inputBlog, setInputBlog] = useState<Partial<blogItem> | any>({})
     const [changeAddBlog, setChangeAddBlog] = useState('Add Blog')
-    const [changeName, setChangeName] = useState('._.' as any)
     const navigate = useNavigate()
     const fileInputRef = useRef<HTMLInputElement | any>()
     const [image, setImage] = useState<File>()
     const [preview, setPreview] = useState<string | any>()
     const [error, setError] = useState('')
-    const wait = (ms: number) => new Promise((empty: TimerHandler) => setTimeout(empty, ms));
-
+    
+    
     const createAutoDate = () => {
         const date = new Date().getDate()
         const month = new Date().getMonth() + 1
@@ -54,15 +53,15 @@ export default function CreateBlogs(props: { funcShow: any }) {
             createAutoDate()
             await ApiUserBlog.CreateUserBlog(inputBlog)
             setChangeAddBlog('Adding Blog...')
-            setChangeName(inputBlog.author)
             await wait(2000)
-
             setError('')
+
         } catch (error) {
             alert(error)
             console.error('❌ Error', error)
             setError('Something went wrong')
         }
+
         finally {
             navigate('/')
         }
@@ -75,7 +74,6 @@ export default function CreateBlogs(props: { funcShow: any }) {
 
 
     useEffect(() => {
-        props.funcShow(true)
         if (image) {
             const reader = new FileReader()
             reader.onloadend = () => {
@@ -94,7 +92,7 @@ export default function CreateBlogs(props: { funcShow: any }) {
 
     return (
         <div className='createBlog-page'>
-            <div className='mx-auto w-full max-w-lg mt-10  py-3 my-3  mb-10 '>
+            <div className='mx-auto w-full max-w-lg mt-10 mb-14'>
 
                 <Form
                     changeTextButton={changeAddBlog}
@@ -113,7 +111,7 @@ export default function CreateBlogs(props: { funcShow: any }) {
                     valueInputImage=''
                     valueInputTitle={inputBlog.title}
                     valueTextAreaBody={inputBlog.body}
-                    className='bg-white px-8 pt-4 pb-0 mb-4'
+                    className='bg-white px-8 pt-4 pb-0'
                 />
             </div>
 

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-export default function ErrorPage(props: { funcShow: any }) {
+
+export default function ErrorPage() {
     const navigate = useNavigate()
-    useEffect(() => {
-        props.funcShow(false)
-    }, [])
+
     return (
         <div className='mx-auto max-w-lg text-center errorPage'>
             <h1 className='text-blue-700 font-extrabold text-9xl tracking-tighter'>
@@ -19,7 +18,7 @@ export default function ErrorPage(props: { funcShow: any }) {
             <button
                 className='text-gray-200 bg-blue-700 rounded-full px-4 py-3 uppercase shadow-lg hover:bg-blue-500'
                 onClick={() => navigate('/')}
-                >
+            >
                 go to homepage
             </button>
         </div>

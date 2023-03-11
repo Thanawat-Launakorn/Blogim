@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { blogItem } from './blog'
 export interface imageItem {
-    id: string,
+    id?: string,
     title: string,
     description: string,
     author: string,

@@ -33,9 +33,9 @@ app.delete('/api/blog/delete/:id', deleteBlog)
 
 //imageRoute
 app.get('/api/image/get', getImage)
-app.post('/api/blog/create', addImage)
-app.get('/api/blog/get/:id', getImageId)
-app.delete('/api/blog/delete/:id', deleteImage)
+app.post('/api/image/create', addImage)
+app.get('/api/image/get/:id', getImageId)
+app.delete('/api/image/delete/:id', deleteImage)
 
 
 app.listen(port, () => console.log(`App listening on http://localhost:${port}/`))

@@ -18,7 +18,6 @@ export default function Home() {
     const [blogs, setBlogs] = useState<blogItem[]>([])
     const [searchBlogger, setSearchBlogger] = useState('')
     const [error, setError] = useState('')
-    const navigate = useNavigate()
     const { loading, setLoading } = useLoading();
     const delay = 3000 as number
     const debounceSearch = useDebounce(searchBlogger, delay)

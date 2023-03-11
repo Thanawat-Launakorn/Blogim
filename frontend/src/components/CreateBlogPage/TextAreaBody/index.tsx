@@ -1,10 +1,12 @@
 import React from 'react'
+import '../TextAreaBody/textareabody.css'
 type TextAreaBodyProps = {
     className?: string,
     placeholder?: string,
     name: string,
     value?: string,
-    rows: number
+    rows: number,
+
     onChange: React.ChangeEventHandler<HTMLTextAreaElement>
 }
 export default function TextAreaBody({
@@ -13,10 +15,11 @@ export default function TextAreaBody({
     name,
     value,
     rows,
+
     onChange
 }: TextAreaBodyProps) {
     return (
-        <div className='textarea'>
+        <div className=''>
             <textarea
                 {...{
                     className,
