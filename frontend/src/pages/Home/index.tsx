@@ -13,18 +13,18 @@ import useDebounce from '../../core/hooks/useDebounce';
 import Form from '../../components/HomePage/Form';
 import Label from '../../components/HomePage/Label';
 import InfiniteScroll from '../../components/HomePage/InfiniteScroll';
+import { delay } from '../../utils/index'
 export default function Home() {
 
     const [blogs, setBlogs] = useState<blogItem[]>([])
     const [searchBlogger, setSearchBlogger] = useState('')
     const [error, setError] = useState('')
     const { loading, setLoading } = useLoading();
-    const delay = 3000 as number
     const debounceSearch = useDebounce(searchBlogger, delay)
     const useStyle = {
         height: '23rem'
     }
-    
+
     const handleSearchBlogger = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchBlogger(e.target.value)
     }

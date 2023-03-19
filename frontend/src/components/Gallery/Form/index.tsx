@@ -5,20 +5,22 @@ import InputField from '../InputField'
 type FormProps = {
   SearchPhotographer: React.ChangeEventHandler<HTMLInputElement>
   valuePhotographer: string
+  className?: string
 }
 
 export default function Form({
   SearchPhotographer,
-  valuePhotographer
+  valuePhotographer,
+  className
 }: FormProps) {
   return (
-    <div>
+    <div className=''>
       <InputField
         name='search-image'
         onChange={SearchPhotographer}
         type='text'
         value={valuePhotographer}
-        className=''
+        className={className}
         placeholder='Search Photographer...'
       />
     </div>

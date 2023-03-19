@@ -11,6 +11,7 @@ import addImage from '../controllers/POST/image/addImageList'
 import getImageId from '../controllers/GET/image/getImageIdList'
 import deleteImage from '../controllers/DELETE/image/deleteImageList'
 import getBlogAuthor from '../controllers/GET/blog/getBlogAuthorList'
+import getImageAuthor from '../controllers/GET/image/getImageAuthorList'
 const app = express()
 const port = Number(process.env.PORT || 3000)
 export interface CommomResponseBody {
@@ -35,7 +36,7 @@ app.delete('/api/blog/delete/:id', deleteBlog)
 app.get('/api/image/get', getImage)
 app.post('/api/image/create', addImage)
 app.get('/api/image/get/:id', getImageId)
-app.get('/api/image/search/:author', )
+app.get('/api/image/search/:author', getImageAuthor)
 app.delete('/api/image/delete/:id', deleteImage)
 
 

@@ -6,8 +6,8 @@ const BASE_URL_IMAGE = "http://localhost:3000/api/image/"
 
 export async function UserImage(params?: SearchField) {
     if (params?.searchField) {
-        // return await axios.get<imageItem>()
-    }else { 
+        return await axios.get<imageItem>(`${BASE_URL_IMAGE}search/${params.searchField}`)
+    } else {
         return await axios.get<Array<imageItem>>(`${BASE_URL_IMAGE}get`)
     }
 }
@@ -20,6 +20,6 @@ export async function CreateUserImage(params?: Omit<imageItem, 'id'>) {
 
 export async function UserImageId(id: string) {
     if (id) {
-        return 
+        return
     }
 }

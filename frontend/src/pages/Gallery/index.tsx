@@ -8,16 +8,17 @@ import imageItem from '../../models/Iimage'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import Image from '../../components/Gallery/ImageItem'
 import * as ApiUserImage from '../../services/API/userImage.api'
-import InputImage from '../../components/CreateBlogPage/InputImage'
+// import { delay } from '../../utils/index'
 import SearchField from '../../models/IsearchField'
 import { AxiosError } from 'axios'
+import { delay } from '../../utils'
 
 export default function Gallery() {
   const [searchPhotographer, setSearchPhotographer] = React.useState('')
   const [images, setImages] = React.useState<imageItem[]>([])
   const [error, setError] = useState('')
   const { loading, setLoading } = useLoading()
-  const delay = 3000
+
 
   const handleSearchPhotographer = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchPhotographer(e.target.value)
@@ -44,9 +45,10 @@ export default function Gallery() {
             res?: any
           }
           const { data } = await ApiUserImage.UserImage()
+          console.log(data);
 
           const response = data as response
-          console.log(response.res);
+
           setImages(response.res)
           setError('')
           return
@@ -87,19 +89,21 @@ export default function Gallery() {
           classname='w-full text-center mx-auto mt-10'
         />
         :
-        <div className='mx-auto max-w-2xl w-full'>
+        <div className='mx-auto max-w-2xl w-full mt-10'>
           <Form
             SearchPhotographer={handleSearchPhotographer}
             valuePhotographer={searchPhotographer}
+            className='max-w-md mb-2 p-2 bg-gray-200 shadow rounded focus:bg-white'
           />
+          <hr className='my-5'/>
           <Label
             icon={faUser}
             searchImage={searchPhotographer}
-            className='w-full flex justify-between mb-3 p-2 mt-5'
+            className='w-full flex justify-between mb-3 p-2'
           />
           <InfiniteScroll
             items={images}
-            className='grid grid-cols-3 gap-3'
+            className='grid grid-cols-3 gap-x-5'
             renderItem={({ item, key }: { item: imageItem, key: string | number }) => {
               return (
                 <Image
