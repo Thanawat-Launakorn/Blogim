@@ -15,6 +15,7 @@ import CreateImage from './pages/CreateImage'
 import Layout from './components/Layout'
 import ThemeProvider from './context/ThemeProvider'
 import LoadingProvider from './context/LoadingProvider'
+import Gallery from './pages/Gallery'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
     { path: '/', element: <Home /> },
     { path: '/create', element: <CreateBlogs /> },
     { path: '/createImage', element: <CreateImage /> },
+    { path: '/gallery', element: <Gallery /> },
     { path: `/blog/:id`, element: <BlogPage /> },
     { path: '/*', element: <ErrorPage /> }
 

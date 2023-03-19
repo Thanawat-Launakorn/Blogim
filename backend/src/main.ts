@@ -1,4 +1,4 @@
-import express, { Router } from 'express'
+import express, { application, Router } from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -35,7 +35,8 @@ app.delete('/api/blog/delete/:id', deleteBlog)
 app.get('/api/image/get', getImage)
 app.post('/api/image/create', addImage)
 app.get('/api/image/get/:id', getImageId)
+app.get('/api/image/search/:author', )
 app.delete('/api/image/delete/:id', deleteImage)
 
 
-app.listen(port, () => console.log(`App listening on http://localhost:${port}/`))
+app.listen(port, () => console.log(`App listening on http://localhost:${port}/api/blog/get`))

@@ -1,10 +1,8 @@
 import axios, { AxiosResponse } from 'axios'
 import blogItem from '../../models/Iblog'
-import imageItem from '../../models/Iimage'
 import SearchField from '../../models/IsearchField'
 
 const BASE_URL_BLOG = "http://localhost:3000/api/blog/"
-const BASE_URL_IMAGE = "http://locahost:3000/api/image/"
 
 export async function UserBlog(params?: SearchField) {
     if (params?.searchField) {
@@ -26,11 +24,5 @@ export async function CreateUserBlog(params?: Omit<blogItem, 'id'>) {
 export async function DeleteBlog(id?: string) {
     if (id) {
         return await axios.delete<blogItem>(`${BASE_URL_BLOG}delete/${id}`)
-    }
-}
-
-export async function CreateUserImage(params?: Omit<imageItem, 'id'>) {
-    if (params) {
-        return await axios.post<imageItem>(`${BASE_URL_IMAGE}create`, params)
     }
 }

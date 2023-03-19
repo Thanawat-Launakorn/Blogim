@@ -67,7 +67,7 @@ export default function Form({
                 onChange={onChangeTitle}
                 type='text'
                 value={valueInputTitle}
-                className='appearance-none rounded w-full py-2 px-3 my-2 mx-2 text-gray-700 bg-transparent leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
+                className='appearance-none rounded w-full py-2 px-3 my-2 mx-2 text-gray-700 text-xl font-bold bg-transparent leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700'
                 placeholder='Card Title'
 
             />
@@ -77,7 +77,7 @@ export default function Form({
                 rows={2}
                 value={valueInputDescription}
                 placeholder='Description...'
-                className='textareaDescription appearance-none rounded w-full py-2 px-3 my-2 mx-2 text-gray-700 bg-transaparent leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700ext-gray-700 text-base'
+                className='textareaDescription appearance-none rounded w-full py-2 px-3 my-0 mx-2 text-gray-700 bg-transaparent leading-tight focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-700ext-gray-700 text-base'
 
             />
             <div className='flex justify-around align-middle'>

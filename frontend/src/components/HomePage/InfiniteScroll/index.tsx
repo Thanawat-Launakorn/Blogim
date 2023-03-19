@@ -20,7 +20,7 @@ export default function InfiniteScroll({
     renderItem,
     className,
     style,
-
+    renderEmptyList
     // key
 
 }: InfiniteScrollProps<blogItem>): JSX.Element {

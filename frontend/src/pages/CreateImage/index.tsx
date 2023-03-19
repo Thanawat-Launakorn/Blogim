@@ -3,7 +3,7 @@ import Form from '../../components/CreateImagePage/Form'
 import imageItem from '../../models/Iimage'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import * as ApiUserBlog from '../../services/API/userBlog.API'
+import * as ApiUserImage from '../../services/API/userImage.api'
 import { wait } from '../../utils'
 
 export default function CreateImage() {
@@ -41,8 +41,7 @@ export default function CreateImage() {
 
   const handleClick = async () => {
     try {
-
-      await ApiUserBlog.CreateUserImage(inputImage)
+      await ApiUserImage.CreateUserImage(inputImage)
       setChangeAddImage('Adding Image...')
       await wait(200)
       setError('')
@@ -54,7 +53,7 @@ export default function CreateImage() {
     }
 
     finally {
-      navigate('/')
+      navigate('/gallery')
     }
   }
 
@@ -77,7 +76,8 @@ export default function CreateImage() {
 
   return (
     <>
-      <div className='mx-auto w-full max-w-xs mt-20 mb-24'>
+      <div className='mx-auto w-full max-w-xs
+       mt-20 mb-24'>
         <Form
           onSubmit={handleSubmit}
           changeText={changeAddImage}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import blogItem from '../../models/Iblog'
-import * as ApiUserBlog from '../../services/API/userBlog.API'
+import * as ApiUserBlog from '../../services/API/userBlog.api'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import Form from '../../components/CreateBlogPage/Form'
 import { wait } from '../../utils'
@@ -92,7 +92,7 @@ export default function CreateBlogs() {
 
     return (
         <div className='createBlog-page'>
-            <div className='mx-auto w-full max-w-lg mt-10 mb-14'>
+            <div className='mx-auto w-full max-w-sm mt-10 mb-14'>
 
                 <Form
                     changeTextButton={changeAddBlog}
@@ -111,7 +111,7 @@ export default function CreateBlogs() {
                     valueInputImage=''
                     valueInputTitle={inputBlog.title}
                     valueTextAreaBody={inputBlog.body}
-                    className='bg-white px-8 pt-4 pb-0'
+                    className='bg-white px-8 py-5'
                 />
             </div>
 

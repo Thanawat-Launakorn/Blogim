@@ -1,14 +1,14 @@
 import { AxiosError } from 'axios';
-import React, { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Blog from '../../components/HomePage/BlogItem';
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+
 import blogItem from '../../models/Iblog';
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import Loader from '../../components/Loader';
 import useLoading from '../../core/hooks/useLoading';
 import SearchField from '../../models/IsearchField'
-import * as ApiUserBlog from '../../services/API/userBlog.API'
+import * as ApiUserBlog from '../../services/API/userBlog.api'
 import useDebounce from '../../core/hooks/useDebounce';
 import Form from '../../components/HomePage/Form';
 import Label from '../../components/HomePage/Label';
@@ -24,6 +24,11 @@ export default function Home() {
     const useStyle = {
         height: '23rem'
     }
+    
+    const handleSearchBlogger = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchBlogger(e.target.value)
+    }
+
     const handleSearchField = useCallback(
         async ({ searchField }: SearchField) => {
             try {
@@ -78,16 +83,13 @@ export default function Home() {
         }
     }, [debounceSearch, handleSearchField])
 
-    const handleSearchBlogger = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchBlogger(e.target.value)
-    }
 
     return (
         <div className='home'>
 
             {loading ? (<Loader color='blue' loading={loading} classname='w-full text-center mx-auto mt-10' />)
                 : !error ? (
-                    <div className='mx-auto w-full max-w-2xl mt-10 flex flex-col justify-center mb-10' >
+                    <div className='mx-auto w-full max-w-2xl mt-10 flex flex-col justify-center mb-16' >
                         <Form
                             className='mx-auto max-w-md mb-2 p-2 bg-gray-200 shadow rounded focus:bg-white'
                             onChangeSearchField={handleSearchBlogger}
